@@ -15,7 +15,7 @@ namespace Bargool.Acad.Library.Text
 	/// <summary>
 	/// Класс для работы со столбцом, сформированным из отдельных текстов
 	/// </summary>
-	public class TextAsColumn<T> where T : DBText
+	public class TextAsColumn<T> where T : Entity
 	{
 		public List<T> cells { get; private set; }
 		public TextAsColumn()

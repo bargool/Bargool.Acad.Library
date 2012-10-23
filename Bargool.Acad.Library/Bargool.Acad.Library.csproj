@@ -57,12 +57,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcadSystemVariableSwitcher.cs" />
+    <Compile Include="Diagnostics\TestTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\TextAsColumn.cs" />
     <Compile Include="Text\TextAsTable.cs" />
     <Compile Include="View.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Diagnostics" />
     <Folder Include="Text" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />

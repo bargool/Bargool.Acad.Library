@@ -13,7 +13,7 @@ namespace Bargool.Acad.Library.Text
 	/// <summary>
 	/// Класс для работы с набором столбцов, сформированных из отдельных текстов
 	/// </summary>
-	public class TextAsTable<T> where T: DBText
+	public class TextAsTable<T>:IEnumerable<TextAsColumn<T>> where T: Entity
 	{
 		public List<TextAsColumn<T>>  columns { get; private set; }
 		
@@ -45,6 +45,15 @@ namespace Bargool.Acad.Library.Text
 			}
 		}
 		
+		public TextAsTable(T[] textEntities, T[] headers)
+			:this()
+		{
+			foreach (T txt in headers)
+			{
+				columns.Add(new TextAsColumn<T>(txt, textEntities));
+			}
+		}
+		
 //		public void ChangeTableValues(Dictionary<string, string[]> Table)
 //		{
 //			foreach (KeyValuePair<string, string[]> kvp in Table)
@@ -61,5 +70,16 @@ namespace Bargool.Acad.Library.Text
 //				sb.AppendLine(row.ToString());
 //			return sb.ToString();
 //		}
+		
+		
+		public IEnumerator<TextAsColumn<T>> GetEnumerator()
+		{
+			return columns.GetEnumerator();
+		}
+		
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			return columns.GetEnumerator();
+		}
 	}
 }
