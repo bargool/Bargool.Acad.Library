@@ -14,7 +14,6 @@ namespace Bargool.Acad.Library
 	/// this variable to previous value
 	/// </summary>
 	/// <example>
-	/// Example how-to
 	/// <code>
 	/// using (AcadSystemVariableSwitcher varSw = new AcadSystemVariableSwitcher(variableName, variableValue))
 	/// {
