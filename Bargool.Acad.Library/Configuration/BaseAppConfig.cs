@@ -147,7 +147,7 @@ namespace Bargool.Acad.Library.Configuration
 					XmlSerializer ser = new XmlSerializer(typeof(T));
 					return (T)ser.Deserialize(stream);
 				}
-				catch (InvalidOperationException ex)
+				catch (InvalidOperationException)
 				{
 					stream.Close();
 					File.Delete(path);
