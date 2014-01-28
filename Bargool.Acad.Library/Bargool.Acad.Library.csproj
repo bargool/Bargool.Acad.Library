@@ -65,7 +65,9 @@
     <Compile Include="Configuration\BaseAppConfig.cs" />
     <Compile Include="Configuration\GlobalConfigAttribute.cs" />
     <Compile Include="Configuration\LocalConfigAttribute.cs" />
+    <Compile Include="DatabaseWorker.cs" />
     <Compile Include="Diagnostics\TestTimer.cs" />
+    <Compile Include="IDatabaseVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\TextAsColumn.cs" />
     <Compile Include="Text\TextAsTable.cs" />
