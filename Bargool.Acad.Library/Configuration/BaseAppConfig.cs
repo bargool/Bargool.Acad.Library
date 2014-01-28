@@ -66,7 +66,6 @@ namespace Bargool.Acad.Library.Configuration
 		
 		#region Handling of paths to local and global config paths
 		const string LOCAL_FILENAME = "appsettings.xml"; // Filename of local configuration
-		const string GLOBAL_FILENAME = "globalsettings.xml"; // Filename of global configuration
 		
 		/// <summary>
 		/// Full path to local configuration
@@ -88,25 +87,10 @@ namespace Bargool.Acad.Library.Configuration
 		}
 		
 		/// <summary>
-		/// Full path to global configuration
-		/// </summary>
-		private string globalSettingsFile
-		{
-			get {
-				if (!string.IsNullOrEmpty(RepositoryDirectory)) {
-					return Path.Combine(RepositoryDirectory, GLOBAL_FILENAME);
-				}
-				else {
-					return string.Empty;
-				}
-			}
-		}
-
-		/// <summary>
 		/// Path to directory where global settings file stored
 		/// </summary>
 		[LocalConfig]
-		public abstract string RepositoryDirectory { get; set; }
+		public abstract string GlobalSettingsFile { get; set; }
 		#endregion
 		
 		/// <summary>
@@ -122,9 +106,9 @@ namespace Bargool.Acad.Library.Configuration
 			
 			T globalInstance = new T();
 			// Задан глобальный конфиг - надо объединять с локальным
-			if (!string.IsNullOrEmpty(localInstance.RepositoryDirectory) && File.Exists(localInstance.globalSettingsFile))
+			if (!string.IsNullOrEmpty(localInstance.GlobalSettingsFile) && File.Exists(localInstance.GlobalSettingsFile))
 			{
-				globalInstance = globalInstance.DeserializeInstanceFromFile(localInstance.globalSettingsFile);
+				globalInstance = globalInstance.DeserializeInstanceFromFile(localInstance.GlobalSettingsFile);
 				
 				// Получаем свойства, помеченные как глобальные, и применяем их значения к локальному конфигу
 				foreach (var prop in typeof(T).GetProperties().Where(p => Attribute.IsDefined(p, typeof(GlobalConfigAttribute))))
