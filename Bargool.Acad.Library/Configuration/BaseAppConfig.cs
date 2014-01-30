@@ -78,7 +78,7 @@ namespace Bargool.Acad.Library.Configuration
 		/// <summary>
 		/// Directory of current application
 		/// </summary>
-		private string programDirectory {
+		protected string programDirectory {
 			get {
 				return Path.GetDirectoryName(
 					Assembly.GetAssembly(typeof(T))
