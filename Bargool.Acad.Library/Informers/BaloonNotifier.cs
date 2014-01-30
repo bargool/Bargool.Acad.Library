@@ -5,6 +5,7 @@
  * Time: 11:22
  */
 using System;
+using System.Drawing;
 using System.Text;
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Windows;
@@ -19,6 +20,10 @@ namespace Bargool.Acad.Library.Informers
 		StringBuilder sb;
 		
 		EventHandler notifyHandler = null;
+		
+		string title;
+		string toolTipText;
+		Icon icon;
 		
 		public BaloonNotifier()
 		{
