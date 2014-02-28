@@ -24,21 +24,27 @@ namespace Bargool.Acad.Library
 		bool isAlreadyOpened;
 		bool doSave;
 		
-		Database currentDb;
-		DocumentLock docLock;
+		Database currentDb = null;
+		DocumentLock docLock = null;
+		
+		private DatabaseWorker()
+		{
+			previousDatabase = HostApplicationServices.WorkingDatabase;
+		}
 		
 		public DatabaseWorker(string path)
+			: this()
 		{
 			this.path = path;
-			previousDatabase = HostApplicationServices.WorkingDatabase;
 			OpenDatabase();
 		}
 		
-//		public DatabaseWorker(Database workDatabase)
-//		{
-//			previousDatabase = HostApplicationServices.WorkingDatabase;
-//			HostApplicationServices.WorkingDatabase = workDatabase;
-//		}
+		public DatabaseWorker(Database workDatabase)
+			: this()
+		{
+			this.path = workDatabase.OriginalFileName;
+			OpenDatabase();
+		}
 		
 		private void OpenDatabase()
 		{
