@@ -71,6 +71,7 @@
     <Compile Include="IDatabaseVisitor.cs" />
     <Compile Include="Informers\BaloonNotifier.cs" />
     <Compile Include="Informers\IInformer.cs" />
+    <Compile Include="LayerUnlocker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\TextAsColumn.cs" />
     <Compile Include="Text\TextAsTable.cs" />
