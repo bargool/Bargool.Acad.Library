@@ -6,8 +6,9 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
@@ -67,9 +68,18 @@ namespace Bargool.Acad.Library
 				if (!System.IO.File.Exists(this.path))
 					throw new System.IO.FileNotFoundException(this.path);
 				
-				currentDb = new Database(false, true);
-				currentDb.ReadDwgFile(this.path, System.IO.FileShare.ReadWrite, true, null);
-				currentDb.CloseInput(true);
+				try
+				{
+					currentDb = new Database(false, true);
+					currentDb.ReadDwgFile(this.path, System.IO.FileShare.ReadWrite, true, null);
+					currentDb.CloseInput(true);
+				}
+				catch (System.Exception ex)
+				{
+					string message = "При открытии файла " + this.path + " возникла ошибка: ";
+					ex.GetType().GetField("_message", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(ex, message + ex.Message);
+					throw ex;
+				}
 			}
 		}
 		
