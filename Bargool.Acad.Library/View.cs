@@ -19,7 +19,7 @@ namespace Bargool.Acad.Library
 		{
 			// Get the current document and database
 			Document acDoc = Application.DocumentManager.MdiActiveDocument;
-			Database acCurDb = acDoc.Database;
+			Database acCurDb = HostApplicationServices.WorkingDatabase;
 			int nCurVport = System.Convert.ToInt32(Application.GetSystemVariable("CVPORT"));
 			// Get the extents of the current space no points
 			// or only a center point is provided
