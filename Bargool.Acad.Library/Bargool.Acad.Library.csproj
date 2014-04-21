@@ -68,6 +68,8 @@
     <Compile Include="Configuration\LocalConfigAttribute.cs" />
     <Compile Include="DatabaseWorker.cs" />
     <Compile Include="Diagnostics\TestTimer.cs" />
+    <Compile Include="Exceptions\UserInputException.cs" />
+    <Compile Include="Exceptions\WrongDataException.cs" />
     <Compile Include="Filers\RefSearchFiler.cs" />
     <Compile Include="IDatabaseVisitor.cs" />
     <Compile Include="Informers\BaloonNotifier.cs" />
@@ -78,12 +80,6 @@
     <Compile Include="Text\TextAsTable.cs" />
     <Compile Include="View.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Diagnostics" />
-    <Folder Include="Configuration" />
-    <Folder Include="Informers" />
-    <Folder Include="Filers" />
-    <Folder Include="Text" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

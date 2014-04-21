@@ -5,8 +5,6 @@
  * Time: 11:13
  */
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -134,7 +132,7 @@ namespace Bargool.Acad.Library.Configuration
 				catch (InvalidOperationException)
 				{
 					stream.Close();
-					File.Delete(path);
+                    File.Delete(path);
 					return new T();
 				}
 			}
