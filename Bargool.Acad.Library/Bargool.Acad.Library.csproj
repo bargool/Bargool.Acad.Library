@@ -51,23 +51,32 @@
       <HintPath>..\..\..\..\Autodesk\ObjectARX_2014\inc\AcMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcadSystemVariableSwitcher.cs" />
+    <Compile Include="Blocks\DynamicParameterReader.cs" />
+    <Compile Include="Blocks\IBlockParameter.cs" />
+    <Compile Include="Blocks\IValueReader.cs" />
+    <Compile Include="Blocks\IValueWriter.cs" />
     <Compile Include="Configuration\BaseAppConfig.cs" />
     <Compile Include="Configuration\GlobalConfigAttribute.cs" />
     <Compile Include="Configuration\LocalConfigAttribute.cs" />
     <Compile Include="DatabaseWorker.cs" />
     <Compile Include="Diagnostics\TestTimer.cs" />
+    <Compile Include="Draw\EntitiesJigger.cs" />
     <Compile Include="Exceptions\UserInputException.cs" />
     <Compile Include="Exceptions\WrongDataException.cs" />
     <Compile Include="Filers\RefSearchFiler.cs" />
@@ -79,7 +88,13 @@
     <Compile Include="Text\TextAsColumn.cs" />
     <Compile Include="Text\TextAsTable.cs" />
     <Compile Include="View.cs" />
+    <Compile Include="WPF\Controls\PalettesetTextBox.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Bargool.Acad.Extensions\Bargool.Acad.Extensions\Bargool.Acad.Extensions.csproj">
+      <Project>{7387df09-051c-4dff-a442-f69dba8c7d9a}</Project>
+      <Name>Bargool.Acad.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>
