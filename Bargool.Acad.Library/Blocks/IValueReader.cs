@@ -7,7 +7,7 @@ namespace Bargool.Acad.Library.Blocks
 {
     public interface IValueReader
     {
-        IBlockParameter ReadValue(IBlockParameter template, string name);
+        IBlockParameter ReadParameter(IBlockParameter template, string name);
         IEnumerable<IBlockParameter> ReadValues(IBlockParameter template);
     }
 }

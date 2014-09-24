@@ -10,7 +10,7 @@ using Bargool.Acad.Extensions;
 
 namespace Bargool.Acad.Library.Blocks
 {
-    class DynamicParameterReader : IValueReader
+    public class DynamicParameterReader : IValueReader
     {
         private readonly RXClass brefClass = RXClass.GetClass(typeof(BlockReference));
 
@@ -60,7 +60,7 @@ namespace Bargool.Acad.Library.Blocks
             this._pc = pc;
         }
 
-        public IBlockParameter ReadValue(IBlockParameter template, string name)
+        public IBlockParameter ReadParameter(IBlockParameter template, string name)
         {
             DynamicBlockReferenceProperty prop = _pc.Cast<DynamicBlockReferenceProperty>()
                 .FirstOrDefault(p => p.PropertyName.Equals(name, StringComparison.OrdinalIgnoreCase));

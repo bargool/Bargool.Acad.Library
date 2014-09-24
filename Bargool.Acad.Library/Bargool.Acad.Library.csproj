@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcadSystemVariableSwitcher.cs" />
+    <Compile Include="Blocks\AttributeReferenceReader.cs" />
     <Compile Include="Blocks\DynamicParameterReader.cs" />
     <Compile Include="Blocks\IBlockParameter.cs" />
     <Compile Include="Blocks\IValueReader.cs" />
