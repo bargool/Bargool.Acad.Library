@@ -67,11 +67,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcadSystemVariableSwitcher.cs" />
-    <Compile Include="Blocks\AttributeReferenceReader.cs" />
-    <Compile Include="Blocks\DynamicParameterReader.cs" />
+    <Compile Include="Blocks\DynamicBlockReader.cs" />
     <Compile Include="Blocks\IBlockParameter.cs" />
-    <Compile Include="Blocks\IValueReader.cs" />
+    <Compile Include="Blocks\IBlockVariablesReader.cs" />
     <Compile Include="Blocks\IValueWriter.cs" />
+    <Compile Include="Blocks\SimpleBlockParameter.cs" />
     <Compile Include="Configuration\BaseAppConfig.cs" />
     <Compile Include="Configuration\GlobalConfigAttribute.cs" />
     <Compile Include="Configuration\LocalConfigAttribute.cs" />

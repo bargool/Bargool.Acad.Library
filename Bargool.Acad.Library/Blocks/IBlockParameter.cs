@@ -11,6 +11,6 @@ namespace Bargool.Acad.Library.Blocks
         string Value { get; }
         IBlockParameter Create(string name, string value);
         void WriteValue(IValueWriter writer);
-        void ReadValue(IValueReader reader);
+        void ReadValue(IBlockVariablesReader reader);
     }
 }
