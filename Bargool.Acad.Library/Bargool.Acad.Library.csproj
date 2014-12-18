@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="AcadSystemVariableSwitcher.cs" />
     <Compile Include="Blocks\DynamicBlockReader.cs" />
+    <Compile Include="Blocks\DynamicBlockWriter.cs" />
     <Compile Include="Blocks\IBlockParameter.cs" />
     <Compile Include="Blocks\IBlockVariablesReader.cs" />
     <Compile Include="Blocks\IValueWriter.cs" />

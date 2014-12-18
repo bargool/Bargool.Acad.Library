@@ -29,6 +29,11 @@ namespace Bargool.Acad.Library
         Database currentDb = null;
         DocumentLock docLock = null;
 
+        public Database WorkingDatabase
+        {
+            get { return currentDb; }
+        }
+
         private DatabaseWorker()
         {
             previousDatabase = HostApplicationServices.WorkingDatabase;
