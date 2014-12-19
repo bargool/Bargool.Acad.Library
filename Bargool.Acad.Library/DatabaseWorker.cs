@@ -25,6 +25,7 @@ namespace Bargool.Acad.Library
         Database previousDatabase;
         bool isAlreadyOpened;
         bool doSave;
+        bool openedDatabase;
 
         Database currentDb = null;
         DocumentLock docLock = null;
@@ -47,6 +48,7 @@ namespace Bargool.Acad.Library
             : this()
         {
             this.path = path;
+            this.currentDb = null;
             OpenDatabase();
         }
 
@@ -58,6 +60,8 @@ namespace Bargool.Acad.Library
             : this()
         {
             this.path = workDatabase.OriginalFileName;
+            this.currentDb = workDatabase;
+            this.openedDatabase = true;
             OpenDatabase();
         }
 
@@ -69,16 +73,16 @@ namespace Bargool.Acad.Library
                 .Cast<Document>()
                 .FirstOrDefault(d => d.Name.Equals(this.path, StringComparison.InvariantCultureIgnoreCase));
             this.isAlreadyOpened = alreadyOpenedDocument != null;
-            currentDb = null;
+            //currentDb = null;
             docLock = null;
             // Если искомый файл уже открыт, то надо не открывать БД, а блокировать документ и обрабатывать
             if (isAlreadyOpened)
             {
                 docLock = alreadyOpenedDocument.LockDocument();
-                HostApplicationServices.WorkingDatabase = alreadyOpenedDocument.Database;
+                //HostApplicationServices.WorkingDatabase = alreadyOpenedDocument.Database;
                 currentDb = alreadyOpenedDocument.Database;
             }
-            else
+            else if (!this.openedDatabase)
             {
                 if (!System.IO.File.Exists(this.path))
                     throw new System.IO.FileNotFoundException(this.path);
@@ -96,6 +100,8 @@ namespace Bargool.Acad.Library
                     throw ex;
                 }
             }
+
+            HostApplicationServices.WorkingDatabase = currentDb;
         }
 
         private void CloseDatabase()
@@ -105,7 +111,7 @@ namespace Bargool.Acad.Library
                 if (docLock != null)
                     docLock.Dispose();
             }
-            else
+            else if (!this.openedDatabase)
             {
                 if (currentDb != null)
                 {
@@ -140,6 +146,9 @@ namespace Bargool.Acad.Library
         public void Visit(IDatabaseVisitor visitedElement, bool doSave)
         {
             this.doSave = doSave;
+            if (doSave && this.openedDatabase)
+                throw new InvalidOperationException("Can't save already opened database");
+
             try
             {
                 visitedElement.Accept(currentDb);
