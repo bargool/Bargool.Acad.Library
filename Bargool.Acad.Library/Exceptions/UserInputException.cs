@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Bargool.Acad.Library.Exceptions
 {
+    [Serializable]
     public class UserInputException : Exception
     {
         public UserInputException(string message)

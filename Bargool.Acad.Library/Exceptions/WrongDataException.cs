@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Bargool.Acad.Library.Exceptions
 {
+    [Serializable]
     public class WrongDataException : Exception
     {
         public WrongDataException(string message)

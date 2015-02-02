@@ -10,7 +10,7 @@ using Bargool.Acad.Extensions;
 
 namespace Bargool.Acad.Library.Blocks
 {
-    class DynamicBlockWriter : IValueWriter
+    public class DynamicBlockWriter : IValueWriter
     {
         private readonly RXClass brefClass = RXClass.GetClass(typeof(BlockReference));
 
@@ -57,6 +57,7 @@ namespace Bargool.Acad.Library.Blocks
                 throw new InvalidOperationException("Not dynamic block");
 
             this.bref = bref;
+            this.Initialize(bref.DynamicBlockReferencePropertyCollection);
         }
 
         private void Initialize(DynamicBlockReferencePropertyCollection pc)
@@ -78,7 +79,17 @@ namespace Bargool.Acad.Library.Blocks
         public void WriteValue(IBlockParameter parameter)
         {
             var para = _pc.Cast<DynamicBlockReferenceProperty>().First(n => n.PropertyName.Equals(parameter.Name, StringComparison.OrdinalIgnoreCase));
-            para.Value = parameter.Value;
+            double value = double.Parse(parameter.Value);
+            if ((double)para.Value != value)
+            {
+                para.Value = value;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (this._pc != null)
+                this._pc.Dispose();
         }
     }
 }

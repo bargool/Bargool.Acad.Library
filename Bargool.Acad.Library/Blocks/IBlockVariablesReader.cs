@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bargool.Acad.Library.Blocks
 {
-    public interface IBlockVariablesReader
+    public interface IBlockVariablesReader : IDisposable
     {
         string BlockName { get; }
 

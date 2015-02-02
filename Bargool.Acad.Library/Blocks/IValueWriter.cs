@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bargool.Acad.Library.Blocks
 {
-    public interface IValueWriter
+    public interface IValueWriter : IDisposable
     {
         void WriteValue(IBlockParameter parameter);
     }

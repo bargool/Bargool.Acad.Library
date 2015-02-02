@@ -82,7 +82,6 @@ namespace Bargool.Acad.Library.Blocks
 
             DynamicBlockReferenceProperty prop = _pc.Cast<DynamicBlockReferenceProperty>()
                 .FirstOrDefault(p => p.PropertyName.Equals(name, StringComparison.OrdinalIgnoreCase));
-
             if (prop == null)
                 return null;
             IBlockParameter result = template.Create(prop.PropertyName, prop.Value.ToString());
@@ -118,6 +117,12 @@ namespace Bargool.Acad.Library.Blocks
                 this._ac.Cast<ObjectId>()
                 .Select(id => id.GetObject<AttributeReference>())
                 .Select(att => template.Create(att.Tag, att.TextString));
+        }
+
+        public void Dispose()
+        {
+            if (this._pc != null)
+                this._pc.Dispose();
         }
     }
 }
