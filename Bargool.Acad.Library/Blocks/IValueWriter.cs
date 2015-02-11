@@ -7,6 +7,6 @@ namespace Bargool.Acad.Library.Blocks
 {
     public interface IValueWriter : IDisposable
     {
-        void WriteValue(IBlockParameter parameter);
+        void WriteValue(IBlockParameter parameter, bool isRequired = true);
     }
 }

@@ -76,10 +76,19 @@ namespace Bargool.Acad.Library.Blocks
             this._ac = ac;
         }
 
-        public void WriteValue(IBlockParameter parameter)
+        public void WriteValue(IBlockParameter parameter, bool isRequired = true)
         {
-            var para = _pc.Cast<DynamicBlockReferenceProperty>().First(n => n.PropertyName.Equals(parameter.Name, StringComparison.OrdinalIgnoreCase));
+            var para = _pc.Cast<DynamicBlockReferenceProperty>().FirstOrDefault(n => n.PropertyName.Equals(parameter.Name, StringComparison.OrdinalIgnoreCase));
+            if (para == null)
+                if (isRequired)
+                    throw new Bargool.Acad.Library.Exceptions.WrongDataException("Нет тут параметра " + parameter.Name);
+                else
+                    return;
+
             double value = double.Parse(parameter.Value);
+            if (value < 0)
+                throw new Bargool.Acad.Library.Exceptions.WrongDataException("Такая геометрия невозможна");
+
             if ((double)para.Value != value)
             {
                 para.Value = value;
