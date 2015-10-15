@@ -51,6 +51,10 @@
       <HintPath>..\..\..\..\Autodesk\ObjectARX_2014\inc\AcMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="AdWindows">
+      <HintPath>..\..\3rdPartyLibraries\Autodesk\AdWindows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -67,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcadSystemVariableSwitcher.cs" />
+    <Compile Include="Active.cs" />
     <Compile Include="Blocks\DynamicBlockReader.cs" />
     <Compile Include="Blocks\DynamicBlockWriter.cs" />
     <Compile Include="Blocks\IBlockParameter.cs" />
@@ -79,12 +84,16 @@
     <Compile Include="DatabaseWorker.cs" />
     <Compile Include="Diagnostics\TestTimer.cs" />
     <Compile Include="Draw\EntitiesJigger.cs" />
+    <Compile Include="Exceptions\CriticalWrongDataException.cs" />
     <Compile Include="Exceptions\UserInputException.cs" />
     <Compile Include="Exceptions\WrongDataException.cs" />
     <Compile Include="Filers\RefSearchFiler.cs" />
+    <Compile Include="GUI\ITaskDialogHandler.cs" />
+    <Compile Include="GUI\TaskDialog.cs" />
     <Compile Include="IDatabaseVisitor.cs" />
     <Compile Include="Informers\BaloonNotifier.cs" />
     <Compile Include="Informers\IInformer.cs" />
+    <Compile Include="Informers\RegularNotifier.cs" />
     <Compile Include="LayerUnlocker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\TextAsColumn.cs" />
@@ -96,6 +105,10 @@
     <ProjectReference Include="..\..\Bargool.Acad.Extensions\Bargool.Acad.Extensions\Bargool.Acad.Extensions.csproj">
       <Project>{7387df09-051c-4dff-a442-f69dba8c7d9a}</Project>
       <Name>Bargool.Acad.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Bargool.Library.General\Bargool.Library.General\Bargool.Library.General.csproj">
+      <Project>{ef6a0f2c-3a78-423b-971e-6d6b62ea80f2}</Project>
+      <Name>Bargool.Library.General</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />

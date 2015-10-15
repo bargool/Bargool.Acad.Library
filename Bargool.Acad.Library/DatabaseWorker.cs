@@ -21,6 +21,7 @@ namespace Bargool.Acad.Library
     /// </summary>
     public class DatabaseWorker : IDisposable
     {
+        // TODO: Перенести doSave в dispose, что бы сохранять базу уже после переключения рабочей обратно
         string path;
         Database previousDatabase;
         bool isAlreadyOpened;
@@ -97,7 +98,7 @@ namespace Bargool.Acad.Library
                 {
                     string message = "При открытии файла " + this.path + " возникла ошибка: ";
                     ex.GetType().GetField("_message", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(ex, message + ex.Message);
-                    throw ex;
+                    throw;
                 }
             }
 
@@ -161,8 +162,8 @@ namespace Bargool.Acad.Library
 
         public void Dispose()
         {
-            CloseDatabase();
             HostApplicationServices.WorkingDatabase = previousDatabase;
+            CloseDatabase();
         }
     }
 }

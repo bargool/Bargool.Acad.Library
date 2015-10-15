@@ -53,11 +53,14 @@ namespace Bargool.Acad.Library.Blocks
 
         private void Initialize(BlockReference bref)
         {
-            if (!bref.IsDynamicBlock)
-                throw new InvalidOperationException("Not dynamic block");
-
-            this.bref = bref;
-            this.Initialize(bref.DynamicBlockReferencePropertyCollection);
+            //throw new InvalidOperationException("Not dynamic block");
+            if (bref.IsDynamicBlock)
+            {
+                this.bref = bref;
+                this.Initialize(bref.DynamicBlockReferencePropertyCollection);
+            }
+            else
+                this.bref = null;
         }
 
         private void Initialize(DynamicBlockReferencePropertyCollection pc)
@@ -78,6 +81,9 @@ namespace Bargool.Acad.Library.Blocks
 
         public void WriteValue(IBlockParameter parameter, bool isRequired = true)
         {
+            if (this.bref == null)
+                return;
+
             var para = _pc.Cast<DynamicBlockReferenceProperty>().FirstOrDefault(n => n.PropertyName.Equals(parameter.Name, StringComparison.OrdinalIgnoreCase));
             if (para == null)
                 if (isRequired)

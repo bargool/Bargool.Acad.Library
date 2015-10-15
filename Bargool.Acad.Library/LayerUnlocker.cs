@@ -52,7 +52,7 @@ namespace Bargool.Acad.Library
 					this.layerId = lt[this.layerName];
 				}
 				
-				LayerTableRecord ltr = tr.GetObject(this.layerId, OpenMode.ForRead) as LayerTableRecord;
+				LayerTableRecord ltr = tr.GetObject(this.layerId, OpenMode.ForRead, true) as LayerTableRecord;
 				if (ltr == null)
 					throw new ArgumentException("Указанный ObjectId не соответствует слою");
 				

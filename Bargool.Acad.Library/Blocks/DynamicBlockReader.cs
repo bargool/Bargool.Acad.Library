@@ -53,10 +53,11 @@ namespace Bargool.Acad.Library.Blocks
 
         private void Initialize(BlockReference bref)
         {
-            if (!bref.IsDynamicBlock)
-                throw new InvalidOperationException("Not dynamic block");
-
-            this.bref = bref;
+            if (bref.IsDynamicBlock)
+                //throw new InvalidOperationException("Not dynamic block");
+                this.bref = bref;
+            else
+                this.bref = null;
         }
 
         private void Initialize(DynamicBlockReferencePropertyCollection pc)
@@ -77,6 +78,8 @@ namespace Bargool.Acad.Library.Blocks
 
         public IBlockParameter ReadDynamicParameter(IBlockParameter template, string name)
         {
+            if (this.bref == null)
+                return null;
             if (_pc == null)
                 Initialize(bref.DynamicBlockReferencePropertyCollection);
 
@@ -91,6 +94,8 @@ namespace Bargool.Acad.Library.Blocks
 
         public IEnumerable<IBlockParameter> ReadDynamicParameters(IBlockParameter template)
         {
+            if (this.bref == null)
+                return null;
             if (_pc == null)
                 Initialize(bref.DynamicBlockReferencePropertyCollection);
 
@@ -101,6 +106,8 @@ namespace Bargool.Acad.Library.Blocks
 
         public IBlockParameter ReadAttribute(IBlockParameter template, string name)
         {
+            if (this.bref == null)
+                return null;
             if (this._ac == null)
                 Initialize(bref.AttributeCollection);
             var att = this._ac.Cast<ObjectId>()
@@ -111,6 +118,8 @@ namespace Bargool.Acad.Library.Blocks
 
         public IEnumerable<IBlockParameter> ReadAttributes(IBlockParameter template)
         {
+            if (this.bref == null)
+                return null;
             if (this._ac == null)
                 Initialize(bref.AttributeCollection);
             return
