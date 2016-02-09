@@ -1,10 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: alexey.nakoryakov
- * Date: 14.01.2014
- * Time: 12:17
- */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -139,6 +133,19 @@ namespace Bargool.Acad.Library
             Visit(visitedElement, false);
         }
 
+        public void Visit(Action<Database> action, bool doSave)
+        {
+            this.doSave = doSave && !this.openedDatabase;
+            try
+            {
+                action(currentDb);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
         /// <summary>
         /// Запуск обработки "посещения"
         /// </summary>
@@ -146,18 +153,7 @@ namespace Bargool.Acad.Library
         /// <param name="doSave">Сохранять ли БД (если обрабатывается уже открытый документ - БД сохраняться не будет)</param>
         public void Visit(IDatabaseVisitor visitedElement, bool doSave)
         {
-            this.doSave = doSave;
-            if (doSave && this.openedDatabase)
-                throw new InvalidOperationException("Can't save already opened database");
-
-            try
-            {
-                visitedElement.Accept(currentDb);
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            this.Visit(visitedElement.Accept, doSave);
         }
 
         public void Dispose()
