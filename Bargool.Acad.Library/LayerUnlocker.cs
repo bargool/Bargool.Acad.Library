@@ -63,7 +63,8 @@ namespace Bargool.Acad.Library
                 {
                     ltr.UpgradeOpen();
                     ltr.IsLocked = false;
-                    ltr.IsFrozen = false;
+                    if (db.Clayer != ltr.ObjectId)
+                        ltr.IsFrozen = false;
                 }
                 tr.Commit();
             }
@@ -77,8 +78,9 @@ namespace Bargool.Acad.Library
                 using (var tr = db.TransactionManager.StartOpenCloseTransaction())
                 {
                     LayerTableRecord ltr = (LayerTableRecord)tr.GetObject(this.layerId, OpenMode.ForWrite);
-                    ltr.IsFrozen = this.isLayerFrozen;
                     ltr.IsLocked = this.isLayerLocked;
+                    if (db.Clayer != ltr.ObjectId)
+                        ltr.IsFrozen = this.isLayerFrozen;
                     tr.Commit();
                 }
             }
